@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb separator="/">
     <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item><a href="/">商品管理</a></el-breadcrumb-item>
+    <el-breadcrumb-item>商品管理</el-breadcrumb-item>
     <el-breadcrumb-item>商品分类</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
@@ -56,6 +56,7 @@
         <el-form-item label="父级分类:">
           <!-- options用来指定数据源 props用来指定配置对象 v-model是把选中的值双向绑定到data中 -->
           <el-cascader
+            ref="cascaderHandle"
             v-model="selectedKeys"
             :options="ParentCateList"
             :props="cascaderProps"
@@ -167,18 +168,19 @@ export default {
       this.ParentCateList = res.data
     },
     parentCateChanged() {
-      console.log(this.selectedKeys)
       // 如果selectedKeys数组中的length大于0，证明选中了父级分类 否则没有选中父类
       if (this.selectedKeys.length > 0) {
         // 数组的长度-1为数组的最后一位
         this.addCateForm.cat_pid = this.selectedKeys[this.selectedKeys.length - 1]
         // 数组的长度正好等于分类的等级 例如长度为2则代表其为三级（0，1，2）以此类推
         this.addCateForm.cat_level = this.selectedKeys.length
+        this.$refs.cascaderHandle.dropDownVisible = false
         return false
       } else {
         // 若果数组长度为0 则证明没有选中父级 所以其本身为最高级0
         this.addCateForm.cat_pid = 0
         this.addCateForm.cat_level = 0
+        this.$refs.cascaderHandle.dropDownVisible = false
       }
     },
     addCateDialogClosed() {

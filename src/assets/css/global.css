@@ -17,3 +17,7 @@ html,body,#app{
 .el-pagination{
     margin-top: 15px;
 }
+/* 解决数据过多时级联选择框弹出来的panel高度溢出浏览器导致数据显示不全的问题 */
+.el-cascader-panel {
+    height: 300px;
+  }
