@@ -20,4 +20,13 @@ html,body,#app{
 /* 解决数据过多时级联选择框弹出来的panel高度溢出浏览器导致数据显示不全的问题 */
 .el-cascader-panel {
     height: 300px;
-  }
+}
+.el-steps {
+    margin: 15px 0;
+}
+.el-step__title {
+    font-size: 13px;
+}
+.ql-editor {
+   min-height: 200px; 
+}
